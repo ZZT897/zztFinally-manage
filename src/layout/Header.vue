@@ -70,12 +70,10 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { validator: this.checkName, trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: "blur" }
         ],
         newPass: [
-          { required: true, message: "请输入新密码", trigger: "blur" },
-          { validator: this.checkName, trigger: "blur" },
+          { required: true, message: "请输入新密码", trigger: "blur" }
         ],
       },
       formData: "",

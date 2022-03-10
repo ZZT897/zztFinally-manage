@@ -109,7 +109,6 @@ export default {
         console.log("获取数据社区数据列表成功！");
       }
     },
-    getComment() {},
     post() {
       this.$router.push("/community/post");
     },

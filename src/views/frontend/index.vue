@@ -18,7 +18,7 @@
       <div class="login">
         <el-button type="warning" @click="pay" :disabled="isVip">{{ !isVip ? "充值 VIP" : "已是Vip会员" }}</el-button>
         <el-button type="primary" @click="login" :disabled="disabled">{{ disabled ? "已登录" : " 登录" }}</el-button>
-        <el-button type="danger" @click="register">注册</el-button>
+        <el-button class="danger" type="danger" @click="register">注册</el-button>
       </div>
       <div class="user">用户:{{ !disabled ? "未登录" : `${Cookies.get("username")}` }}</div>
       <el-tooltip class="item" effect="dark" content="积分可兑换数据集" placement="bottom">
@@ -36,7 +36,7 @@
 
     <!-- footer -->
     <!-- <div class="footer">
-      <div class="copyright">Copyright @2022 广东金融学院</div>
+      <div class="copyright">Copyright @2022 广州新华学院</div>
     </div> -->
   </div>
 </template>
@@ -144,49 +144,58 @@ body {
   min-height: 100%;
   .el-menu-demo {
     display: flex;
+    padding-left: 20%;
     box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.4);
-    padding-left: 10%;
-    padding-right: 10%;
     .logo-img {
-      margin-right: 40px;
-      width: 60px;
+      margin-right: 20px;
+      width: 70px;
+      height: 60px;
       a {
-        display: inline-block;
+        display: block;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
         img {
-          padding: 10% 0;
-          width: 100%;
-          height: 50%;
+          width: 70px;
         }
       }
     }
     .login {
-      margin-left: auto;
-      margin-left: 60px;
-      margin-top: 10px;
-      margin-right: 20px;
+      display: flex;
+      justify-content: center;
+      box-sizing: border-box;
+      height: 100%;
+      padding: 10px 10px;
+      background-color: #fff;
+      border-bottom: 1px solid #fff;
     }
     .user {
-      width: 10%;
       height: 60px;
       color: #409eff;
+      border-bottom: 1px solid #fff;
+      background-color: #fff;
       text-align: center;
       line-height: 60px;
       white-space: nowrap;
     }
-  }
-  .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 80px;
-    color: #b1adad;
-    text-align: center;
-    background-color: #fff;
-    margin-top: 10px;
-    .copyright {
-      padding: 30px;
+    .item {
+      border-radius: 0;
     }
   }
+  // .footer {
+  //   position: fixed;
+  //   bottom: 0;
+  //   width: 100%;
+  //   height: 80px;
+  //   color: #b1adad;
+  //   text-align: center;
+  //   background-color: #fff;
+  //   margin-top: 10px;
+  //   .copyright {
+  //     padding: 30px;
+  //   }
+  // }
   .scoreBtn {
     color: red;
     border: 0;

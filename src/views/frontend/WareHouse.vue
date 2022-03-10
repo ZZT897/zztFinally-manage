@@ -115,7 +115,7 @@ export default {
       getDownloadRequest(row);
     },
     //下载
-    async download(row) {
+    download(row) {
       if (Cookies.get("username")) {
         if (row.access === "免费" || (row.access === "会员免费" && Cookies.get("isVip") == "yes")) {
           this.getDownload(row);

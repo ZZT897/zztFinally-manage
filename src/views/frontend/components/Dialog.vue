@@ -106,6 +106,7 @@ input {
   height: 32px;
 }
 .loginForm {
+  margin: 0 auto;
   max-width: 350px;
   padding: 20px 35px 15px 35px;
   box-sizing: border-box;

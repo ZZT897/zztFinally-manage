@@ -67,6 +67,8 @@ export default {
         } else {
           this.$message.error('删除失败！')
         }
+      }).catch(err => {
+        console.log(err)
       })
     },
     dialogClosed() {

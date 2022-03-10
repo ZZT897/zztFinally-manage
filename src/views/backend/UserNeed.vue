@@ -73,8 +73,7 @@ export default {
           } else {
             this.$message.error("删除失败！");
           }
-        })
-        .catch((err) => err);
+        }).catch(err => err)
     },
     setRowStyle({ row, columnIndex }) {
       if (row.hasSupply == "是" && columnIndex == 5) {

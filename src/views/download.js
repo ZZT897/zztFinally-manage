@@ -23,7 +23,7 @@ const getDownloadRequest = async (row) => {
         downloadElement.click(); // 点击下载
         document.body.removeChild(downloadElement); // 下载完成移除元素
         window.URL.revokeObjectURL(href); // 释放掉blob对象
-        console.log("获取列表数据成功");
+        // console.log("获取列表数据成功");
         this.$message.success("下载成功！");
     } else {
         this.$message.error("下载失败！");
