@@ -5,7 +5,7 @@
       <el-card class="option-card">
         <span style="color: #409eff">数据共享分类</span>
         <ul>
-          <li v-for="(item, index) in items" :key="index" @click="optionClick(item)" :class="{ active: item.active }">{{ item.title }}</li>
+          <li v-for="(item, index) in items" :key="index" @click="optionClick(item)" :class="['tab', { active: item.active }]">{{ item.title }}</li>
         </ul>
         <el-button type="danger" @click="post">我要发帖</el-button>
       </el-card>
@@ -86,7 +86,7 @@ export default {
         let res = await addCommunityComment({ commentCardId: item.id, comment: this.comment[index], username: Cookies.get("username") });
         if (res.code == 200) {
           this.getDataList(this.currentItem);
-          this.comment[index]=''
+          this.comment[index] = "";
         }
       }
     },
@@ -146,7 +146,7 @@ export default {
         list-style: none;
         padding-top: 1%;
         margin-right: 10%;
-        width: 20%;
+        width: 100px;
         height: 100%;
         border-radius: 20px;
         white-space: nowrap;

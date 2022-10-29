@@ -2,9 +2,9 @@
   <el-dialog title="修改密码" :visible.sync="showDialog" width="35%" @close="dialogClosed" class="dialog">
     <el-form :model="dataForm" status-icon :rules="dataRules" ref="dataForm" label-width="80px" class="dataForm">
       <el-form-item prop="username" label="用户名" class="input">
-        <el-input type="text" placeholder="请输入要修改的用户名" v-model="dataForm.username"></el-input>
+        <el-input type="text" placeholder="请输入要修改的用户名" v-model="dataForm.username" disabled></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password" class="input">
+      <el-form-item label="新密码" prop="password" class="input">
         <el-input type="text" placeholder="请输入要修改的密码" v-model="dataForm.password"></el-input>
       </el-form-item>
       <el-form-item>
@@ -15,17 +15,17 @@
 </template>
 
 <script>
-import { editPersonInfo } from '../../api/share'
-import Cookies from 'js-cookie'
+import { editPersonInfo } from "../../api/share";
+import Cookies from "js-cookie";
 export default {
-  name: 'EditPwd',
+  name: "EditPwd",
   props: {
-    showEditDialog: Boolean
+    showEditDialog: Boolean,
   },
   watch: {
     showEditDialog() {
-      this.showDialog = this.showEditDialog
-    }
+      this.showDialog = this.showEditDialog;
+    },
   },
   data() {
     var validateUsername = (rule, value, callback) => {
@@ -43,40 +43,45 @@ export default {
     return {
       showDialog: false,
       dataForm: {
-        id: Cookies.get('id'),
-        username: '',
-        password: ''
+        username: "",
+        password: "",
       },
       dataRules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
-        password: [{ validator: validatePassword, trigger: "blur" }]
-      }
-    }
+        password: [{ validator: validatePassword, trigger: "blur" }],
+      },
+    };
+  },
+  created() {
+    this.dataForm.username = Cookies.get("username");
   },
   methods: {
     dialogClosed() {
-      this.$emit('dialogClosed')
-      this.$refs.dataForm.resetFields()
+      this.$emit("dialogClosed");
+      this.$refs.dataForm.resetFields();
     },
     dataSubmit(formName) {
-      this.$refs[formName].validate(async valid => {
-        if(valid) {
-          let res = await editPersonInfo(this.dataForm)
+      this.$refs[formName].validate(async (valid) => {
+        if (valid) {
+          let res = await editPersonInfo(this.dataForm);
           if (res.code === 200) {
-            this.$message.success('修改密码成功!')
-            this.$emit('dialogClosed')
-          } else if (res.code === 400) {
-            this.$message.error('该用户已经存在!')
+            this.$message.success("修改密码成功!");
+            this.$emit("dialogClosed");
+            Cookies.remove("username");
+            Cookies.remove("id");
+            Cookies.remove("isVip");
+            this.$router.push({ path: "/warehouse" });
+            window.location.reload();
           } else {
-            this.$message.error('修改密码失败!')
+            this.$message.error("修改密码失败!");
           }
         } else {
-          return false
+          return false;
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
