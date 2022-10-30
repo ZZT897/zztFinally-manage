@@ -135,6 +135,21 @@ const router = new VueRouter({
                 }
             ]
         },
+        {
+            path: '/newsInfo',
+            name: '资讯管理',
+            meta: { title: '资讯管理', icon: 'el-icon-s-promotion' },
+            component: Layout,
+            redirect: '/newsList',
+            children: [
+                {
+                    path: '/newsList',
+                    name: '资讯列表',
+                    component: () => import('@/views/backend/newsList.vue'),
+                    meta: { title: '资讯列表', icon: 'el-icon-document' },
+                }
+            ]
+        },
         { path: '*', redirect: '/404', hidden: true }
     ]
 })
