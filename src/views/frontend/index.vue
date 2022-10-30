@@ -9,6 +9,7 @@
       </div>
       <el-menu-item index="/warehouse">数据仓库</el-menu-item>
       <el-menu-item index="/community">数据社区</el-menu-item>
+      <el-menu-item index="/dataNews">数据资讯</el-menu-item>
       <el-submenu index="/share">
         <template slot="title">项目供需</template>
         <el-menu-item index="/share/need">发布需求</el-menu-item>

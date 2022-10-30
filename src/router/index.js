@@ -14,7 +14,7 @@ const router = new VueRouter({
             path: '/frontend',
             name: 'Frontend',
             component: () => import("@/views/frontend/index"),
-            redirect:"warehouse",
+            redirect: "warehouse",
             children: [
                 {
                     path: '/warehouse',
@@ -25,6 +25,11 @@ const router = new VueRouter({
                     path: '/community',
                     name: '数据社区',
                     component: () => import('@/views/frontend/Community.vue')
+                },
+                {
+                    path: '/dataNews',
+                    name: '数据资讯',
+                    component: () => import('@/views/frontend/dataNews.vue')
                 },
                 {
                     path: '/community/post',
@@ -137,7 +142,7 @@ const router = new VueRouter({
 //获取原型对象上的push函数
 const originalPush = VueRouter.prototype.push
 //修改原型对象中的push方法
-VueRouter.prototype.push = function push(location) {
+VueRouter.prototype.push = function push (location) {
     return originalPush.call(this, location).catch(err => err)
 }
 
