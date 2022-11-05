@@ -21,7 +21,14 @@
         <el-button type="primary" @click="login" :disabled="disabled">{{ disabled ? "已登录" : " 登录" }}</el-button>
         <el-button class="danger" type="danger" @click="register">注册</el-button>
       </div>
-      <div class="user">用户:{{ !disabled ? "未登录" : `${Cookies.get("username")}` }}</div>
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          <div class="user">用户:{{ !disabled ? "未登录" : `${Cookies.get("username")}` }}</div>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item><span @click="layout">退出</span></el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <el-tooltip class="item" effect="dark" content="积分可兑换数据集" placement="bottom">
         <el-button class="scoreBtn">积分:{{ score }}</el-button>
       </el-tooltip>
@@ -88,6 +95,14 @@ export default {
     }
   },
   methods: {
+    // 退出登录
+    layout() {
+      Cookies.remove("username");
+      Cookies.remove("id");
+      Cookies.remove("isVip");
+      this.$message.success("已退出登录");
+      window.location.reload();
+    },
     handleSelect() {},
     pay() {
       if (!Cookies.get("username")) {
