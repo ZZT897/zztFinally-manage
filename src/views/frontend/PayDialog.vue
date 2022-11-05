@@ -143,6 +143,12 @@ export default {
     cursor: pointer;
   }
 }
+.pay-img {
+  width: 30%;
+}
+.box {
+  display: flex;
+}
 .submit-btn {
   width: 20%;
   margin-left: 80%;
