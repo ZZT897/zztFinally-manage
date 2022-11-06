@@ -2,7 +2,9 @@
   <div class="person">
     <el-card class="person-card">
       <div class="info">
-        <div class="person-info">基本信息<span class="btn"><el-button type="primary" @click="editPwd">修改密码</el-button></span></div>
+        <div class="person-info">
+          基本信息<span class="btn"><el-button type="primary" @click="editPwd">修改密码</el-button></span>
+        </div>
         <div class="common">用户名： {{ `${Cookies.get("username")}` }}</div>
         <div class="common">个人积分： {{ score }}</div>
         <div class="common">
@@ -11,7 +13,7 @@
           <span v-if="needData.length == 0">无</span>
           <el-table :data="needData" border style="width: 100%" class="need-table" v-else-if="needData.length > 0" :cell-style="setRowStyle1">
             <el-table-column prop="title" label="标题" width="190"></el-table-column>
-            <el-table-column prop="detail" label="详情描述" width="190"></el-table-column>
+            <el-table-column prop="detail" label="详情描述"></el-table-column>
             <el-table-column prop="type" label="服务类型" width="130"></el-table-column>
             <el-table-column prop="name" label="联系人" width="130"></el-table-column>
             <el-table-column prop="phone" label="手机号码" width="150"></el-table-column>
@@ -25,7 +27,7 @@
           <el-table :data="giveData" border style="width: 100%" class="give-table" v-else-if="giveData.length > 0" :cell-style="setRowStyle2">
             <el-table-column prop="name" label="名称" width="190" fixed="left"></el-table-column>
             <el-table-column prop="dataSort" label="数据类别" width="190"></el-table-column>
-            <el-table-column prop="info" label="基本信息" width="130"></el-table-column>
+            <el-table-column prop="info" label="基本信息"></el-table-column>
             <el-table-column prop="isCheck" label="审核情况" width="150"></el-table-column>
             <el-table-column prop="file" label="数据集" width="219" fixed="right">
               <template slot-scope="scope">
@@ -43,7 +45,7 @@
 </template>
 
 <script>
-import EditPwd from './EditPwd'
+import EditPwd from "./EditPwd";
 import { getPersonData } from "../../api/share";
 import Cookies from "js-cookie";
 import { getScore } from "../../api/loginRegister";
@@ -51,14 +53,14 @@ import { getDownloadRequest } from "../download";
 export default {
   name: "Person",
   components: {
-    EditPwd
+    EditPwd,
   },
   data() {
     return {
       needData: [],
       giveData: [],
       score: 0,
-      showEditDialog: false
+      showEditDialog: false,
     };
   },
   mounted() {
@@ -109,11 +111,11 @@ export default {
       }
     },
     editPwd() {
-      this.showEditDialog = true
+      this.showEditDialog = true;
     },
     dialogClosed() {
-      this.showEditDialog = false
-    }
+      this.showEditDialog = false;
+    },
   },
 };
 </script>

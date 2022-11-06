@@ -21,7 +21,7 @@
       <el-table :data="dataList" border style="width: 100%" :cell-style="setRowStyle">
         <el-table-column prop="id" label="数据ID" width="80" fixed="left"></el-table-column>
         <el-table-column prop="name" label="名称" width="120" fixed="left"></el-table-column>
-        <el-table-column prop="info" label="基本信息" width="180"></el-table-column>
+        <el-table-column prop="info" label="基本信息"></el-table-column>
         <el-table-column prop="score" label="兑换积分" width="100"></el-table-column>
         <el-table-column prop="access" label="价格" width="120"></el-table-column>
         <el-table-column prop="dataSort" label="数据类别" width="120"></el-table-column>
@@ -36,7 +36,7 @@
       </el-table>
 
       <!-- 分页 -->
-      <el-pagination background layout="total, prev, pager, next" :total="count" @current-change="handleCurrentChange" :current-page="currentPage"></el-pagination>
+      <el-pagination background layout="total, prev, pager, next" :total="count" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize"></el-pagination>
     </el-card>
 
     <edit-data-dialog :showDataDialog="showDataDialog" @dialogClosed="dialogClosed" :dataObj="dataObj"></edit-data-dialog>
@@ -63,7 +63,7 @@ export default {
       pageData: [],
       dataList: [], //渲染的数据数组
       count: 0, //数据总数
-      pageSize: 10, //每页数据条数
+      pageSize: 5, //每页数据条数
       currentPage: 1, //当前页数
       showDataDialog: false,
       dataObj: {},

@@ -8,6 +8,33 @@ const getNewsData = (data) => {
   })
 }
 
+const delNewsData = (data) => {
+  return request({
+    url: '/delNewsData',
+    method: 'post',
+    data
+  })
+}
+
+const editNews = (data) => {
+  return request({
+    url: '/editNewsData',
+    method: 'post',
+    data
+  })
+}
+
+const addNews = (data) => {
+  return request({
+    url: '/addNewsData',
+    method: 'post',
+    data
+  })
+}
+
 export {
-  getNewsData
+  getNewsData,
+  delNewsData,
+  editNews,
+  addNews
 }

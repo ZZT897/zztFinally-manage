@@ -1,7 +1,7 @@
 <template>
   <div class="dataNews">
     <el-card class="option-card">
-      <div class="new-box" @click="goToDetail(item.url)" v-for="item in newsData" :key="item.id">
+      <div class="new-box" @click="goToDetail(item.url)" v-for="item in dataList" :key="item.id">
         <div class="news-left">
           <span class="title"
             ><span class="number">{{ item.id }}</span
@@ -16,6 +16,8 @@
           <img src="../../assets/img/news.png" alt="" />
         </div>
       </div>
+      <!-- 分页 -->
+      <el-pagination background layout="total, prev, pager, next" :page-size="pageSize" :total="count" @current-change="handleCurrentChange" :current-page="currentPage" class="pagination"></el-pagination>
     </el-card>
   </div>
 </template>
@@ -28,6 +30,10 @@ export default {
   data() {
     return {
       newsData: [],
+      count: 0, //数据总数
+      pageSize: 5, //每页数据条数
+      currentPage: 1, //当前页数
+      dataList: [],
     };
   },
   components: {},
@@ -40,7 +46,20 @@ export default {
       console.log(res);
       if (res.code == 200) {
         this.newsData = res.data;
+        this.count = res.data.length;
+        this.getPageData();
       }
+    },
+    //获取要渲染的页面数据
+    getPageData() {
+      let start = (this.currentPage - 1) * this.pageSize;
+      let end = this.pageSize * this.currentPage;
+      this.dataList = this.newsData.slice(start, end);
+    },
+    //当前页改变时
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+      this.getPageData();
     },
     // 页面跳转
     goToDetail(url) {
@@ -71,7 +90,9 @@ export default {
 .dataNews {
   position: relative;
   margin-top: 20px;
-  // text-align: center;
+  .pagination {
+    text-align: center;
+  }
   .option-card {
     position: absolute;
     left: 50%;

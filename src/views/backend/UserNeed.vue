@@ -2,9 +2,9 @@
   <div class="userNeed">
     <el-card class="user-card">
       <!-- 数据列表 -->
-      <el-table :data="pageData" border style="width: 100%" :cell-style="setRowStyle">
+      <el-table :data="dataList" border style="width: 100%" :cell-style="setRowStyle">
         <el-table-column prop="title" label="标题" width="160" fixed="left"></el-table-column>
-        <el-table-column prop="detail" label="详情描述" width="160"></el-table-column>
+        <el-table-column prop="detail" label="详情描述"></el-table-column>
         <el-table-column prop="type" label="服务类型" width="150"></el-table-column>
         <el-table-column prop="name" label="联系人" width="130"></el-table-column>
         <el-table-column prop="phone" label="手机号码" width="130"></el-table-column>
@@ -16,6 +16,8 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页 -->
+      <el-pagination background layout="total, prev, pager, next" :page-size="pageSize" :total="count" @current-change="handleCurrentChange" :current-page="currentPage"></el-pagination>
     </el-card>
 
     <!-- 修改对话框 -->
@@ -36,17 +38,34 @@ export default {
       pageData: [],
       showNeedDialog: false,
       dataObj: {},
+      dataList: [], //渲染的数据数组
+      count: 0, //数据总数
+      pageSize: 2, //每页数据条数
+      currentPage: 1, //当前页数
     };
   },
-  mounted() {
+  created() {
     this.getData();
   },
   methods: {
+    //获取要渲染的页面数据
+    getPageData() {
+      let start = (this.currentPage - 1) * this.pageSize;
+      let end = this.pageSize * this.currentPage;
+      this.dataList = this.pageData.slice(start, end);
+    },
+    //当前页改变时
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+      this.getPageData();
+    },
     async getData() {
       let res = await getNeed();
       if (res.code === 200) {
         console.log("需求信息获取成功");
         this.pageData = res.data;
+        this.count = res.data.length;
+        this.getPageData();
       }
     },
     edit(row) {
@@ -73,7 +92,8 @@ export default {
           } else {
             this.$message.error("删除失败！");
           }
-        }).catch(err => err)
+        })
+        .catch((err) => err);
     },
     setRowStyle({ row, columnIndex }) {
       if (row.hasSupply == "是" && columnIndex == 5) {

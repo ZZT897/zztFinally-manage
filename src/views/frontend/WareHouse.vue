@@ -27,11 +27,11 @@
 
       <!-- 数据列表 -->
       <el-table :data="pageData" border style="width: 100%" class="el-table">
-        <el-table-column prop="name" label="名称" width="190" fixed="left"></el-table-column>
-        <el-table-column prop="info" label="基本信息" width="190"></el-table-column>
-        <el-table-column prop="score" label="兑换积分" width="130"></el-table-column>
-        <el-table-column prop="access" label="价格" width="130"></el-table-column>
-        <el-table-column prop="dataSort" label="数据类别" width="150"></el-table-column>
+        <el-table-column prop="name" label="名称" width="160" fixed="left"></el-table-column>
+        <el-table-column prop="info" label="基本信息"></el-table-column>
+        <el-table-column prop="score" label="兑换积分" width="60"></el-table-column>
+        <el-table-column prop="access" label="价格" width="100"></el-table-column>
+        <el-table-column prop="dataSort" label="数据类别" width="100"></el-table-column>
         <el-table-column prop="right" label="操作" width="219" fixed="right">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="detailClick(scope.row)">查看</el-button>
@@ -42,7 +42,7 @@
       </el-table>
 
       <!-- 分页 -->
-      <el-pagination background layout="total, prev, pager, next" :total="count" @current-change="handleCurrentChange" :current-page="currentPage"> </el-pagination>
+      <el-pagination background layout="total, prev, pager, next" :total="count" :page-size="pageSize" :currentPage="currentPage" @current-change="handleCurrentChange" :current-page="currentPage"> </el-pagination>
     </el-card>
     <!-- 查看对话框 -->
     <detail-dialog :title="title" :price="price" :info="info" :type="type" :showDetailDialog="showDetailDialog" @closeDialog="closeDialog" />
@@ -66,7 +66,7 @@ export default {
       dataList: [], //总数据列表
       pageData: [], //渲染的数据数组
       count: 0, //数据总数
-      pageSize: 10, //每页数据条数
+      pageSize: 5, //每页数据条数
       currentPage: 1, //当前页数
       showDetailDialog: false,
       title: "",

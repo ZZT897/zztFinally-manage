@@ -22,7 +22,7 @@
       <el-table :data="dataList" border style="width: 100%">
         <el-table-column prop="name" label="名称" width="150"></el-table-column>
         <el-table-column prop="title" label="标题" width="150"></el-table-column>
-        <el-table-column prop="content" label="内容" width="220"></el-table-column>
+        <el-table-column prop="content" label="内容"></el-table-column>
         <el-table-column prop="type" label="主题" width="150"></el-table-column>
         <el-table-column prop="right" label="操作" width="173">
           <template slot-scope="scope">
@@ -33,7 +33,7 @@
       </el-table>
 
       <!-- 分页 -->
-      <el-pagination background layout="total, prev, pager, next" :total="count" @current-change="handleCurrentChange" :current-page="currentPage"></el-pagination>
+      <el-pagination background layout="total, prev, pager, next" :page-size="pageSize" :total="count" @current-change="handleCurrentChange" :current-page="currentPage"></el-pagination>
     </el-card>
 
     <!-- 修改对话框 -->
@@ -62,14 +62,14 @@ export default {
       pageData: [],
       dataList: [], //渲染的数据数组
       count: 0, //数据总数
-      pageSize: 10, //每页数据条数
+      pageSize: 5, //每页数据条数
       currentPage: 1, //当前页数
       dataObj: {},
       showCommunityDialog: false,
       showPublishDialog: false,
     };
   },
-  mounted() {
+  created() {
     this.getData();
   },
   methods: {
